@@ -1,5 +1,6 @@
 
-from fastapi import APIRouter, Header
+from fastapi import APIRouter
+from fastapi import Header
 from pydantic import BaseModel, EmailStr
 from functions_jwt import validate_token, write_token
 from fastapi.responses import JSONResponse
@@ -19,6 +20,6 @@ def login(user: User):
 
 
 @auth_routes.post("/verify/token")
-def verify_token(Authorization: str = Header(default=None)):
+def verify_token(Authorization: str = Header(None)):
     token = Authorization.split(" ")[1]
     return validate_token(token, output=True)
